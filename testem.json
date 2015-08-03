@@ -1,3 +1,6 @@
 {
-	"framework": "jasmine2"
+	"framework": "mocha",
+	"src_files": [
+		"meatballsSpec.js"
+	]
 }
