@@ -3,7 +3,7 @@ var expect = require('chai').expect,
 	
 describe('Bills first movie', function () {
 	
-	it('has a length of 8538', function (){
+	it('returns text from meatballs.txt', function (){
 		source.meatballs(function(content){
 			expect(content).to.equal('Meatballs (film)')
 		})
