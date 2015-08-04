@@ -1,22 +1,42 @@
 var fs = require('fs'),
-    counter = 0,
+	Q = require('q'),
+	Promise = Q.nfcall(),
+	obj = {},
     content;
 
-module.exports = {
 
-    // logger: function(ans) {
-    //     return ans;
-    // },
+var logger = function(){
+	console.log('this is from logd')
+		
+	},
 
-    meatballs: function(cb) {
-
+	 meatballs = function(cb) {
         fs.readFile('./meatballs.txt', 'utf-8', function(err, data) {
-            counter += 1;
             if (err) throw err;
-            content = data.toString();
-            cb(content);
+            cb(data);
         })
-        
-        
-    }
-}
+    },
+
+    typer = function(){
+    	return (typeof Promise)
+    },
+
+    
+    tester = Q.nfcall(logger)
+    	.then(logger)
+    	.catch(function(error){
+    		console.log('this is error', error)
+    	})
+    
+
+
+
+
+
+
+
+
+exports.logger = logger;
+exports.meatballs = meatballs;
+exports.typer = typer;
+exports.tester = tester;
