@@ -1,42 +1,35 @@
 var fs = require('fs'),
-	Q = require('q'),
-	Promise = Q.nfcall(),
-	obj = {},
+    Q = require('q'),
     content;
 
 
-var logger = function(){
-	console.log('this is from logd')
-		
-	},
+function test() {
+    return 'test function ran';
 
-	 meatballs = function(cb) {
-        fs.readFile('./meatballs.txt', 'utf-8', function(err, data) {
-            if (err) throw err;
-            cb(data);
-        })
-    },
+};
 
-    typer = function(){
-    	return (typeof Promise)
-    },
+var readfileerror = function(){
+  return Q.nfcall(fs.readFile, './meatball.txt', 'utf-8')
+    .then(function(data) {
+        return data;
+    })
+    .fail(function(err) {
+        console.log('error', err)
+    })
+    .done(function(){
+      return 'all done!!'
+    });
+  };
 
-    
-    tester = Q.nfcall(logger)
-    	.then(logger)
-    	.catch(function(error){
-    		console.log('this is error', error)
-    	})
-    
+///// Begin coding here!! ////////////
 
 
 
 
 
 
+////////////////////////////////////////
 
+exports.readfileerror = readfileerror;
+exports.test = test;
 
-exports.logger = logger;
-exports.meatballs = meatballs;
-exports.typer = typer;
-exports.tester = tester;
