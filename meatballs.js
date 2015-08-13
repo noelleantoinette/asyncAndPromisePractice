@@ -1,22 +1,35 @@
 var fs = require('fs'),
-    counter = 0,
+    Q = require('q'),
     content;
 
-module.exports = {
 
-    // logger: function(ans) {
-    //     return ans;
-    // },
+function test() {
+    return 'test function ran';
 
-    meatballs: function(cb) {
+};
 
-        fs.readFile('./meatballs.txt', 'utf-8', function(err, data) {
-            counter += 1;
-            if (err) throw err;
-            content = data.toString();
-            cb(content);
-        })
-        
-        
-    }
-}
+var readfileerror = function(){
+  return Q.nfcall(fs.readFile, './meatball.txt', 'utf-8')
+    .then(function(data) {
+        return data;
+    })
+    .fail(function(err) {
+        console.log('error', err)
+    })
+    .done(function(){
+      return 'all done!!'
+    });
+  };
+
+///// Begin coding here!! ////////////
+
+
+
+
+
+
+////////////////////////////////////////
+
+exports.readfileerror = readfileerror;
+exports.test = test;
+
