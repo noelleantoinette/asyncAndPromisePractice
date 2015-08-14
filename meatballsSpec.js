@@ -8,23 +8,48 @@ var chai = require('chai'),
 chai.use(spies);
 
 
-describe('practice promisified function', function() {
+
+describe('fs.readFile and seperate paragraphs', function() {
     
+    it('returns content of ./meatballs.txt', function() {
+        source.meatballs(function() {
+            expect(data).to.have.length(8539)
+        })
+    });
+
+    it('has a callback', function() {
+        var spy = chai.spy(source.textSplitter);
+        source.meatballs(function() {
+            expect(spy).to.have.been.called()
+        })
+    })
+
+    it('has a callback which splits data into an array containing paragraphs', function() {
+       source.textSplitter('test \n test', function(){
+        expect(data.length).to.equal(2)
+       })
+        
+    })
+    
+
+})
+
+
+describe('practice promisified function', function() {
 
     it('is a function', function() {
         assert.typeOf(source.practice, 'function');
 
     });
 
-    it('attaches logger function to Q.nfcall', function() {
+    it('attaches test function to Q.nfcall', function() {
         var spy = chai.spy(source.practice.nfcall);
-
         source.practice(function() {
             expect(spy).to.have.been.called();
         })
     });
 
-    it('runs logger function',
+    it('runs test function',
         function() {
             source.practice(function(data) {
                 expect(data).to.equal('test function ran')
@@ -33,18 +58,25 @@ describe('practice promisified function', function() {
 
 })
 
-describe('Bills first movie', function() {
-    
+describe('promisified fs.readfile', function() {
 
-    it('returns text from meatballs.txt', function() {
-        source.readfile(function(data) {
+    it('returns entire text from meatballs.txt', function() {
+        source.readfile(function() {
             expect(data).to.have.length(8539)
-        })
+        });
     });
 
-    it('returns confirmation of done()', function() {
+    it('converts data from file into an array containing paragraphs', function() {
         source.readfile(function(data) {
-            expect(data).to.equal('all done!!')
+            assert.typeOf(data, 'array').with.length(112)
+        })
+    })
+
+    it('returns confirmation of done()', function() {
+        var spy = chai.spy(source.readfile.done);
+        source.readfile(function(data) {
+            expect(spy).to.have.been.called();
+            expect(data).to.equal('all done!!');
         })
     });
 
@@ -56,3 +88,4 @@ describe('Bills first movie', function() {
     });
 
 })
+
