@@ -8,33 +8,6 @@ var chai = require('chai'),
 chai.use(spies);
 
 
-
-describe('fs.readFile and seperate paragraphs', function() {
-    
-    it('returns content of ./meatballs.txt', function() {
-        source.meatballs(function() {
-            expect(data).to.have.length(8539)
-        })
-    });
-
-    it('has a callback', function() {
-        var spy = chai.spy(source.textSplitter);
-        source.meatballs(function() {
-            expect(spy).to.have.been.called()
-        })
-    })
-
-    it('has a callback which splits data into an array containing paragraphs', function() {
-       source.textSplitter('test \n test', function(){
-        expect(data.length).to.equal(2)
-       })
-        
-    })
-    
-
-})
-
-
 describe('practice promisified function', function() {
 
     it('is a function', function() {
@@ -57,6 +30,36 @@ describe('practice promisified function', function() {
         });
 
 })
+
+
+describe('fs.readFile and seperate paragraphs', function() {
+
+    it('returns content of ./meatballs.txt', function() {
+        source.meatballs(function() {
+            expect(data).to.have.length(8539);
+
+        });
+        source.meatballs(function() {
+            assert.typeOf(data, 'string')
+        });
+    });
+
+    it('has a callback', function() {
+        var spy = chai.spy(source.textSplitter);
+        source.meatballs(function() {
+            expect(spy).to.have.been.called()
+        })
+    })
+
+    it('has a callback which splits data into an array containing paragraphs', function() {
+        source.textSplitter('test \n test', function() {
+            expect(data.length).to.equal(2)
+        })
+
+    })
+
+})
+
 
 describe('promisified fs.readfile', function() {
 
@@ -88,4 +91,3 @@ describe('promisified fs.readfile', function() {
     });
 
 })
-
