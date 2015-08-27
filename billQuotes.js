@@ -1,11 +1,16 @@
 var fs = require('fs'),
     Q = require('q'),
+    async = require('async'),
     content,
     response;
 
 
+function errGet(error, data){
+
+}
+
 function returnOut(data) {
-    response = data;
+    return data;
 }
 
 
@@ -31,24 +36,29 @@ function parse(y, func, z, compNum) {
 }
 
 
+function textGetter(cb) {
+    fs.readFile("./billMurrayQuotes.txt", 'utf-8', function(err, data) {
+        if (err) throw err;
+        cb(data);
+    })
+};
+
+
+
 function quoteFinder(num, text) {
 
 
 }
 
-function textGetter(cb) {
-        fs.readFile("./billMurrayQuotes.txt", 'utf-8', function(err, data) {
-            if (err) throw err;
-         
-            console.log(parse(data, splitter, " ", 1))
-            cb(data);
+function asyncWTest(input, done){
+async.waterfall([
+    function(cb){
+        fs.readFile(input, "utf-8", cb);
+    }
+], done)
+}
 
-        })
-};
-
-textGetter()
-
-
+exports.asyncWTest = asyncWTest;
 exports.returnOut = returnOut;
 exports.quoteFinder = quoteFinder;
 exports.textGetter = textGetter;
