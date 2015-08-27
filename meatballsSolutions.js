@@ -1,9 +1,4 @@
 
-function test() {
-    return 'test function ran';
-
-};
-
 function logger(content){
   console.log('THIS IS LOGGER', content.length);
 }
@@ -14,7 +9,7 @@ function textSplitter(content){
 }
 
 function meatballs(cb) {
-    fs.readFile('./meatballs.txt', 'utf-8', function(err, data) {
+    return fs.readFile('./meatballs.txt', 'utf-8', function(err, data) {
         if (err) throw err;
         cb(data);
     })
