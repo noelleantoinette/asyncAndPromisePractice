@@ -51,7 +51,7 @@ describe('fs.readFile and seperate paragraphs', function() {
         })
     })
 
-    it('has a callback which splits data into an array containing paragraphs', function() {
+    it('has a callback which splits data into an array containing paragraphs', function(done) {
         source.textSplitter('test \n test', function() {
             expect(data.length).to.equal(2)
         })
@@ -61,32 +61,36 @@ describe('fs.readFile and seperate paragraphs', function() {
 })
 
 
-describe('promisified fs.readfile', function() {
+describe('promisified fs.readfile', function(done) {
 
     it('returns entire text from meatballs.txt', function() {
         source.readfile(function() {
             expect(data).to.have.length(8539)
+            done();
         });
     });
 
-    it('converts data from file into an array containing paragraphs', function() {
+    it('converts data from file into an array containing paragraphs', function(done) {
         source.readfile(function(data) {
             assert.typeOf(data, 'array').with.length(112)
+            done();
         })
     })
 
-    it('returns confirmation of done()', function() {
+    it('returns confirmation of done()', function(done) {
         var spy = chai.spy(source.readfile.done);
         source.readfile(function(data) {
             expect(spy).to.have.been.called();
             expect(data).to.equal('all done!!');
+            done();
         })
     });
 
-    it('has an error handler', function() {
+    it('has an error handler', function(done) {
         var spy = chai.spy(source.readfile.fail);
         source.readfileerror(function() {
             expect(spy).to.have.been.called();
+            done();
         })
     });
 
