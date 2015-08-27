@@ -1,16 +1,24 @@
 var fs = require('fs'),
     Q = require('q'),
+<<<<<<< HEAD
     async = require('async'),
+=======
+>>>>>>> 723960f472a7646ed5cf6bc787221ea792b4921c
     content,
     response;
 
 
+<<<<<<< HEAD
 function errGet(error, data){
 
 }
 
 function returnOut(data) {
     return data;
+=======
+function returnOut(data) {
+    response = data;
+>>>>>>> 723960f472a7646ed5cf6bc787221ea792b4921c
 }
 
 
@@ -36,6 +44,7 @@ function parse(y, func, z, compNum) {
 }
 
 
+<<<<<<< HEAD
 function textGetter(cb) {
 
     fs.readFile("./billMurrayQuotes.txt", 'utf-8', function(err, data) {
@@ -67,6 +76,26 @@ function asyncWTest(input, cb){
 }
 
 exports.asyncWTest = asyncWTest;
+=======
+function quoteFinder(num, text) {
+
+
+}
+
+function textGetter(cb) {
+        fs.readFile("./billMurrayQuotes.txt", 'utf-8', function(err, data) {
+            if (err) throw err;
+         
+            console.log(parse(data, splitter, " ", 1))
+            cb(data);
+
+        })
+};
+
+textGetter()
+
+
+>>>>>>> 723960f472a7646ed5cf6bc787221ea792b4921c
 exports.returnOut = returnOut;
 exports.quoteFinder = quoteFinder;
 exports.textGetter = textGetter;

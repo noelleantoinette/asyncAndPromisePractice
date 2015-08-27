@@ -36,3 +36,22 @@ describe('Bill Murray quote finder', function() {
 
 
 
+=======
+describe('Bill Murray quote finder', function() {
+    
+    it('returns content of ./billMurrayQuotes.txt', function() {
+        source.textGetter(function() {
+            expect(data).to.have.length(8940);
+        })
+        source.textGetter(function() {
+           assert.typeOf(data, 'string');
+        })
+    });
+
+    it('finds the quote by number', function(){
+
+
+    })
+
+});
+>>>>>>> 723960f472a7646ed5cf6bc787221ea792b4921c
